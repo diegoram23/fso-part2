@@ -1,5 +1,4 @@
 import Content from "./Content";
-import Header from "./Header";
 
 const Course = () => {
 
@@ -47,13 +46,10 @@ const Course = () => {
       ]
     }
   ]
-console.log('courses', courses);
 
   return (
-    <div className="courses">
-      <Header courses={courses} />
+    <div >
       <Content courses={courses} />
-
     </div>
   );
 }
