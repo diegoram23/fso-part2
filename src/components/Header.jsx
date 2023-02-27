@@ -1,9 +1,15 @@
 
-const Header = ({course}) => {
+const Header = ({ courses }) => {
 
-    return (
-         <h1>{course.name}</h1>
-    );
-  }
-   
-  export default Header;
+  return (
+    <div>
+      {/* {courses.map(title => {
+        return <div key={title.id}>
+          <h2>{title.name}</h2>
+        </div>
+      })} */}
+    </div>
+  );
+}
+
+export default Header;

@@ -1,9 +1,9 @@
 const Parts = () => {
 
     return (
-        
-        <div >
 
+        <div >
+         
         </div>
     )
 }
