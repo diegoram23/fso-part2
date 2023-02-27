@@ -1,10 +1,18 @@
-import React from "react";
 
-const Content = (props) => {
-  
+const Content = ({ course }) => {
+
+    const total = course.parts.reduce((sum, value) => {
+        return sum + value.exercises
+    }, 0)
+
     return (
         <div>
-        <p>{props.name} {props.exercises}</p>
+            {course.parts.map(course => {
+                return <div key={course.id}>
+                    <p>{course.name} {course.exercises}</p>
+                </div>
+            })}
+            <h4>The total of {total} exercises</h4>
         </div>
     )
 }
