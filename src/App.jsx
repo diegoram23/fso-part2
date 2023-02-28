@@ -21,7 +21,7 @@ const App = () => {
   const [searchResults, setSearchResults] = useState('')
 
 
-  const handleAddName = (event) => {
+  const handleSubmitPerson = (event) => {
     event.preventDefault()
     const duplicate = persons.find(person => person.name === newName)
 
@@ -57,31 +57,23 @@ const App = () => {
 
   const searchMatch = persons.filter(person => person.name.toLowerCase().includes(searchResults.toLowerCase()))
   searchMatch ? searchMatch : persons
-  
+
   return (
     <div>
-      <h2>Phonebook</h2>
-      Search:<input
+      <Filter
         type='text'
-        value={searchResults}
-        onChange={handleSearchChange}
+        valueSearch={searchResults}
+        handleSearchChange={handleSearchChange}
       />
-      <form onSubmit={handleAddName}>
-        <div>
-          Name: <input
-            value={newName}
-            onChange={handleNameChange}
-          />
-          <div>
-            Phone: <input
-              value={newNumber}
-              onChange={handleNumberChange} />
-          </div>
-          <button type="submit">Add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      {searchMatch.map(person => <h5 key={person.id}>{person.name} {person.number}</h5>)}
+      <PersonForm
+        handleSubmitPerson={handleSubmitPerson}
+        valueName={newName}
+        handleNameChange={handleNameChange}
+        valueNumber={newNumber}
+        handleNumberChange={handleNumberChange}
+        type='submit' />
+
+      <Persons searchMatch={searchMatch} />
     </div>
   )
 }
