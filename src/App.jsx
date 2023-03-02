@@ -13,6 +13,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [searchResults, setSearchResults] = useState('')
   const [succesfulMessage, setSuccesfulMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -78,6 +79,13 @@ const App = () => {
             setPersons(initialPersons)
           })
       })
+      .catch(error => {
+        console.log('not working');
+        setErrorMessage(`has already been removed from server`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 2000)
+      })
   }
 
   return (
@@ -97,7 +105,8 @@ const App = () => {
         type='submit' />
 
       <Notification
-        message={succesfulMessage}
+        successMessage={succesfulMessage}
+        errMessage={errorMessage}
       />
 
       <Persons
