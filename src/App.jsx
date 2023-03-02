@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import personService from './services/persons'
+import Notification from './components/Notification'
+import Footer from './components/Footer'
 
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchResults, setSearchResults] = useState('')
+  const [succesfulMessage, setSuccesfulMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -40,6 +42,10 @@ const App = () => {
       .create(nameObj)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
+        setSuccesfulMessage(`Added ${returnedPerson.name} to Contacts`)
+        setTimeout(() => {
+          setSuccesfulMessage(null)
+        }, 2000)
         setNewName('')
         setNewNumber('')
       })
@@ -63,15 +69,15 @@ const App = () => {
 
   const handleDelete = (id, name) => {
     personService
-    .deletePerson(id)
-    .then(() => {
-      window.confirm(`Are you sure you want to delete ${name}`)
-      personService
-      .getAll()
-      .then(initialPersons => {
-        setPersons(initialPersons)
+      .deletePerson(id)
+      .then(() => {
+        window.confirm(`Are you sure you want to delete ${name}`)
+        personService
+          .getAll()
+          .then(initialPersons => {
+            setPersons(initialPersons)
+          })
       })
-    })
   }
 
   return (
@@ -81,6 +87,7 @@ const App = () => {
         valueSearch={searchResults}
         handleSearchChange={handleSearchChange}
       />
+
       <PersonForm
         handleSubmitPerson={handleSubmitPerson}
         valueName={newName}
@@ -89,10 +96,16 @@ const App = () => {
         handleNumberChange={handleNumberChange}
         type='submit' />
 
+      <Notification
+        message={succesfulMessage}
+      />
+
       <Persons
         searchMatch={searchMatch}
         handleDelete={handleDelete}
       />
+
+      <Footer />
     </div>
   )
 }
