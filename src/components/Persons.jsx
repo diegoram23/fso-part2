@@ -7,7 +7,7 @@ const Persons = ({ searchMatch, handleDelete }) => {
                     key={person.id}>
                     {person.name}
                     {person.number}
-                    <button onClick={() => handleDelete(person.id)}>Delete</button>
+                    <button onClick={() => handleDelete(person.id, person.name)}>Delete</button>
                 </h5>)}
 
         </div>

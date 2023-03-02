@@ -61,8 +61,17 @@ const App = () => {
   searchMatch ? searchMatch : persons
 
 
-  const handleDelete = (id) => {
-    console.log(id);
+  const handleDelete = (id, name) => {
+    personService
+    .deletePerson(id)
+    .then(() => {
+      window.confirm(`Are you sure you want to delete ${name}`)
+      personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+      })
+    })
   }
 
   return (
