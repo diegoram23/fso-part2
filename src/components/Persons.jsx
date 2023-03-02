@@ -1,8 +1,15 @@
-const Persons = ({searchMatch}) => {
+const Persons = ({ searchMatch, handleDelete }) => {
     return (
         <div>
             <h2>Contacts</h2>
-            {searchMatch.map(person => <h5 key={person.id}>{person.name} {person.number}</h5>)}
+            {searchMatch.map(person =>
+                <h5
+                    key={person.id}>
+                    {person.name}
+                    {person.number}
+                    <button onClick={() => handleDelete(person.id)}>Delete</button>
+                </h5>)}
+
         </div>
     )
 }

@@ -37,12 +37,12 @@ const App = () => {
       number: newNumber
     }
     personService
-    .create(nameObj)
-    .then(returnedPerson => {
-      setPersons(persons.concat(returnedPerson))
-      setNewName('')
-      setNewNumber('')
-    })
+      .create(nameObj)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
+        setNewName('')
+        setNewNumber('')
+      })
   }
 
   const handleNameChange = (event) => {
@@ -60,6 +60,11 @@ const App = () => {
   const searchMatch = persons.filter(person => person.name.toLowerCase().includes(searchResults.toLowerCase()))
   searchMatch ? searchMatch : persons
 
+
+  const handleDelete = (id) => {
+    console.log(id);
+  }
+
   return (
     <div>
       <Filter
@@ -75,7 +80,10 @@ const App = () => {
         handleNumberChange={handleNumberChange}
         type='submit' />
 
-      <Persons searchMatch={searchMatch} />
+      <Persons
+        searchMatch={searchMatch}
+        handleDelete={handleDelete}
+      />
     </div>
   )
 }
