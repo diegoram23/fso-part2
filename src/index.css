@@ -33,3 +33,7 @@ h5 {
     max-width: 70%;
     margin-top: 0.5em;
 }
+
+.flag {
+    width: 100px;
+}
